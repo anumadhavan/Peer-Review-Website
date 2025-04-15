@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Employee = require('../models/Employee');
 
+//Get All Employees
 router.get('/', async (req, res) => {
   const employees = await Employee.find();
   res.json(employees);
 });
 
+//Create new Employee
 router.post('/', async (req, res) => {
   const employee = new Employee(req.body);
   await employee.save();
