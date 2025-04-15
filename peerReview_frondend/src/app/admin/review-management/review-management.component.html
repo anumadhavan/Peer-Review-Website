@@ -1,0 +1,30 @@
+<div class="p-6">
+  <h2 class="text-xl font-bold mb-4">Manage Reviews</h2>
+
+  <form class="space-y-2 mb-6" (ngSubmit)="createReview()">
+    
+    <select class="border p-2 w-full" [(ngModel)]="form.revieweeId" name="revieweeId">
+      <option disabled selected>Select reviewee</option>
+      <option *ngFor="let emp of employees" [value]="emp._id">{{ emp.name }}</option>
+    </select>
+
+    <label class="block text-sm font-semibold">Assign Reviewers</label>
+    <div class="flex flex-wrap gap-2">
+      <label *ngFor="let emp of employees" class="inline-flex items-center space-x-2">
+        <input type="checkbox" [value]= "emp._id" [checked]="form.reviewerIds.includes(emp._id)" (change)="onReviewerToggle(emp._id, $event)" name="reviewerIds" />
+        <span>{{ emp.name }}</span>
+      </label>
+    </div>
+
+    <input type="date" class="border p-2 w-full" [(ngModel)]="form.dueDate" name="dueDate" required />
+
+    <button class="bg-green-600 text-white px-4 py-2 rounded">Create Review</button>
+  </form>
+
+  <ul class="border-t divide-y pt-4">
+    <li *ngFor="let review of reviews" class="py-2">
+      <strong>{{ review.revieweeId?.name }}</strong> - {{ review.dueDate | date:'mediumDate' }}
+    </li>
+  </ul>
+</div>
+

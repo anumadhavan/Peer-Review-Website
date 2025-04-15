@@ -1,0 +1,20 @@
+<div class="p-6">
+  <h2 class="text-xl font-bold mb-4">Manage Employees</h2>
+
+  <form class="mb-4 space-y-2" (ngSubmit)="addEmployee()">
+    <input class="border p-2 block w-full" [(ngModel)]="newEmployee.name" name="name" placeholder="Name" required />
+    <input class="border p-2 block w-full" [(ngModel)]="newEmployee.email" name="email" placeholder="Email" required />
+    <select class="border p-2 block w-full" [(ngModel)]="newEmployee.role" name="role">
+      <option value="employee">Employee</option>
+      <option value="admin">Admin</option>
+    </select>
+    <button class="bg-blue-600 text-white px-4 py-2 rounded">Add Employee</button>
+  </form>
+
+  <ul class="divide-y border-t pt-4">
+    <li *ngFor="let emp of employees" class="py-2">
+      <strong>{{ emp.name }}</strong> - {{ emp.email }} ({{ emp.role }})
+    </li>
+  </ul>
+</div>
+
